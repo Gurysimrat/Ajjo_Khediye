@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "home": "Home",
+    "characters": "Characters",
+    "stories": "Stories",
+    "games": "Games",
+    "schools": "Schools",
+    "creators": "Creators",
+    "about": "About",
+    "joinUs": "Join Us"
+  },
+  "hero": {
+    "title": "Welcome to Ajjo Khediye",
+    "subtitle": "A living Punjabi storybook — catch letters, meet friends, and grow up in the village.",
+    "cta": "Start Playing"
+  },
+  "game": {
+    "comboLabel": "Combo",
+    "xpLabel": "XP"
+  }
+}

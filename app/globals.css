@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* ============================================================
+   AJJO KHEDIYE — DESIGN TOKENS
+   A handcrafted, phulkari-inspired storybook world.
+   ============================================================ */
+
+:root {
+  /* ---- Color: Phulkari palette ---- */
+  --color-ajjo-cream: #fbf3e4;
+  --color-ajjo-cream-deep: #f3e6cf;
+  --color-ajjo-terracotta: #e8613a;
+  --color-ajjo-terracotta-soft: #f3a08a;
+  --color-ajjo-marigold: #f5a623;
+  --color-ajjo-marigold-soft: #fcd98a;
+  --color-ajjo-leaf: #4caf6a;
+  --color-ajjo-leaf-soft: #a8ddba;
+  --color-ajjo-navy: #1b2a4a;
+  --color-ajjo-navy-soft: #3a4f7a;
+  --color-ajjo-wool-pink: #f2a6a1;
+  --color-ajjo-sky: #bfe3f0;
+  --color-ajjo-sky-deep: #8fcbe0;
+  --color-ajjo-wood: #8b5e3c;
+  --color-ajjo-wood-light: #c19a6b;
+  --color-ajjo-ink: #2e2a26;
+  --color-ajjo-ink-soft: #5c5550;
+  --color-ajjo-white: #fffaf0;
+
+  /* ---- Shadows: warm-toned, never pure black ---- */
+  --shadow-toy-sm: 0 2px 8px rgba(139, 94, 60, 0.12);
+  --shadow-toy-md: 0 6px 20px rgba(139, 94, 60, 0.16);
+  --shadow-toy-lg: 0 12px 40px rgba(139, 94, 60, 0.2);
+  --shadow-toy-press: inset 0 2px 6px rgba(139, 94, 60, 0.25);
+
+  /* ---- Radii: toy rounding ---- */
+  --radius-toy-sm: 14px;
+  --radius-toy-md: 20px;
+  --radius-toy-lg: 32px;
+  --radius-toy-pill: 999px;
+
+  /* ---- Motion: easings & durations ---- */
+  --ease-toy-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-toy-soft: cubic-bezier(0.45, 0, 0.2, 1);
+  --duration-micro: 180ms;
+  --duration-medium: 500ms;
+  --duration-ambient: 14s;
+
+  /* Default surface colors */
+  --background: var(--color-ajjo-cream);
+  --foreground: var(--color-ajjo-ink);
+
+  /* Fonts — self-hosted via @fontsource (see app/layout.tsx) */
+  --font-display: "Fredoka", system-ui, sans-serif;
+  --font-body: "Quicksand", system-ui, sans-serif;
+  --font-gurmukhi: "Noto Sans Gurmukhi Variable", "Noto Sans Gurmukhi", sans-serif;
+}
+
+@theme inline {
+  /* Map Phulkari palette into Tailwind's color namespace */
+  --color-cream: var(--color-ajjo-cream);
+  --color-cream-deep: var(--color-ajjo-cream-deep);
+  --color-terracotta: var(--color-ajjo-terracotta);
+  --color-terracotta-soft: var(--color-ajjo-terracotta-soft);
+  --color-marigold: var(--color-ajjo-marigold);
+  --color-marigold-soft: var(--color-ajjo-marigold-soft);
+  --color-leaf: var(--color-ajjo-leaf);
+  --color-leaf-soft: var(--color-ajjo-leaf-soft);
+  --color-navy: var(--color-ajjo-navy);
+  --color-navy-soft: var(--color-ajjo-navy-soft);
+  --color-wool-pink: var(--color-ajjo-wool-pink);
+  --color-sky: var(--color-ajjo-sky);
+  --color-sky-deep: var(--color-ajjo-sky-deep);
+  --color-wood: var(--color-ajjo-wood);
+  --color-wood-light: var(--color-ajjo-wood-light);
+  --color-ink: var(--color-ajjo-ink);
+  --color-ink-soft: var(--color-ajjo-ink-soft);
+  --color-paper: var(--color-ajjo-white);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Fonts — sourced from :root above (self-hosted via @fontsource) */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-gurmukhi: var(--font-gurmukhi);
+  --radius-toy-sm: var(--radius-toy-sm);
+  --radius-toy-md: var(--radius-toy-md);
+  --radius-toy-lg: var(--radius-toy-lg);
+  --radius-toy-pill: var(--radius-toy-pill);
+
+  /* Shadows */
+  --shadow-toy-sm: var(--shadow-toy-sm);
+  --shadow-toy-md: var(--shadow-toy-md);
+  --shadow-toy-lg: var(--shadow-toy-lg);
+  --shadow-toy-press: var(--shadow-toy-press);
+
+  /* Animation easings (Tailwind ease- utilities) */
+  --ease-toy-bounce: var(--ease-toy-bounce);
+  --ease-toy-soft: var(--ease-toy-soft);
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Gurmukhi text: locked utility class.
+   Never animate, transform, or morph elements using this class. */
+.font-gurmukhi-locked {
+  font-family: var(--font-gurmukhi), "Noto Sans Gurmukhi", sans-serif;
+  font-feature-settings: normal;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Visible focus ring for accessibility — toy-styled */
+:focus-visible {
+  outline: 3px solid var(--color-ajjo-marigold);
+  outline-offset: 3px;
+  border-radius: var(--radius-toy-sm);
+}
+
+/* Felt/paper grain texture overlay utility */
+.bg-grain {
+  position: relative;
+}
+.bg-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  background-image: url("/assets/textures/grain.png");
+  background-size: 240px 240px;
+}
+
+/* Stitched / hand-drawn border style */
+.border-stitched {
+  border: 2px dashed var(--color-ajjo-wood-light);
+  border-radius: var(--radius-toy-md);
+}
