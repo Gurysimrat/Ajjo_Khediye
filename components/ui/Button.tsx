@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
+import Link from "next/link";
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { pressable } from "@/lib/animations/framerVariants";
@@ -10,7 +11,7 @@ export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
   size?: "sm" | "md" | "lg";
 }
 
-const variantStyles: Record<NonNullable<ButtonProps["variant"]>, string> = {
+export const variantStyles: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
     "bg-terracotta text-paper shadow-[var(--shadow-toy-md)] hover:shadow-[var(--shadow-toy-lg)]",
   secondary:
@@ -22,7 +23,7 @@ const variantStyles: Record<NonNullable<ButtonProps["variant"]>, string> = {
     "bg-leaf text-paper shadow-[var(--shadow-toy-md)] hover:shadow-[var(--shadow-toy-lg)]",
 };
 
-const sizeStyles: Record<NonNullable<ButtonProps["size"]>, string> = {
+export const sizeStyles: Record<NonNullable<ButtonProps["size"]>, string> = {
   sm: "px-4 py-2 text-sm rounded-[var(--radius-toy-sm)]",
   md: "px-6 py-3 text-base rounded-[var(--radius-toy-md)]",
   lg: "px-8 py-4 text-lg rounded-[var(--radius-toy-md)]",
@@ -58,3 +59,46 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
+
+const MotionLink = motion.create(Link);
+
+export interface LinkButtonProps {
+  href: string;
+  variant?: ButtonProps["variant"];
+  size?: ButtonProps["size"];
+  className?: string;
+  children?: React.ReactNode;
+}
+
+/**
+ * Link-styled identically to Button, for navigation CTAs.
+ * Wraps Next.js Link directly with motion press feedback (no nested
+ * anchor elements).
+ */
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
+  ({ className, href, variant = "primary", size = "md", children, ...props }, ref) => {
+    return (
+      <MotionLink
+        ref={ref}
+        href={href}
+        variants={pressable}
+        initial="rest"
+        whileHover="hover"
+        whileTap="tap"
+        className={cn(
+          "inline-flex items-center justify-center font-display font-semibold tracking-wide select-none",
+          "transition-shadow duration-200",
+          "focus-visible:outline-none",
+          variantStyles[variant],
+          sizeStyles[size],
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </MotionLink>
+    );
+  }
+);
+
+LinkButton.displayName = "LinkButton";
